@@ -5,6 +5,8 @@ import cors from 'cors';
 
 import postRoutes from './routes/posts.js';
 
+import CONNECTION_URL from './protected.js';
+
 const app = express();
 
 app.use('/posts', postRoutes);
@@ -12,8 +14,6 @@ app.use('/posts', postRoutes);
 app.use(bodyParser.json({ limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true}));
 app.use(cors());
-
-const CONNECTION_URL = 'mongodb+srv://master:XKwfUDhqc1VDxf31@cluster0.8uiuw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 const PORT = process.env.PORT || 5000;
 
