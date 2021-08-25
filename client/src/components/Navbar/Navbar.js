@@ -1,24 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import {Container, Navbar, Nav, Dropdown} from 'react-bootstrap';
 
 const Navigation = () => {
     const [user, setUser ] = useState(JSON.parse(localStorage.getItem('profile')));
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const location = useLocation();
+
+    const logout = () => {
+        dispatch({type: 'LOGOUT'});
+
+        history.push('/');
+
+        setUser(null);
+    }
 
     useEffect(() => {
         const token = user?.token;
         // JWT
         setUser(JSON.parse(localStorage.getItem('profile')));
-    }, [])
+    }, [location])
 
     return (
         <Navbar collapseOnSelect bg="primary" variant="dark" expand="md">
             <Container>
-            <Navbar.Brand href="#home">Wavespace</Navbar.Brand>
+            <Navbar.Brand href="/">Wavespace</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse>
                 <Nav className="me-auto">
-                    <Nav.Link href="#features">Spaces</Nav.Link>
+                    <Nav.Link href="/spaces">Spaces</Nav.Link>
                 </Nav>
                 <Nav>
                     { user ? (
@@ -30,7 +42,7 @@ const Navigation = () => {
 
                                     <Dropdown.Menu>
                                         <Dropdown.Item href="#/action-1">Spaces</Dropdown.Item>
-                                        <Dropdown.Item href="#/action-2">Logout</Dropdown.Item>
+                                        <Dropdown.Item onClick={logout}>Logout</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </div>

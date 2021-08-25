@@ -63,8 +63,8 @@ const Auth = () => {
     return (
         <Container>
             <Row>
-                <Col>
-                        <h2 className="text-center">{!isSignup ? "Sign-In" : "Sign-Up"}</h2>
+                <Col className="text-center">
+                        <h2>{!isSignup ? "Sign-In" : "Sign-Up"}</h2>
                         <GoogleLogin
                             clientId ="265415550082-jomjd2m838tcdgca6pprg492f3pmuj4v.apps.googleusercontent.com"
                             buttonText="Google Sign In"
@@ -72,23 +72,27 @@ const Auth = () => {
                             onFailure={googleFailure}
                             cookiePolicy="single_host_origin"
                         />
-                        {/*--- SIGN IN ONLY ---, Email Input*/}
+                        {/*  ================== 
+                         *   ===   Inputs   ===
+                        *    ==================   /}
+                        * 
+                        {/*  ---  SIGN IN ONLY  ---, Email Input*/}
                         { isSignup && (<Input className={"mx-auto  col-3"} id="email" handleChange={handleChange} type="email" placeholder="Email"/> ) }
-                        {/*Username Input*/}
+                        {/*  --- Username Input ---*/}
                         <Input className={"mx-auto  col-3"} id="username" handleChange={handleChange} type="username" placeholder="Username"/>
-                        {/*Password Input*/}
+                        {/*  --- Password Input ---*/}
                         <Input className={"mx-auto col-3"} id="password" handleChange={handleChange} type={showPassword ? "text" : "password"} placeholder="Password" handleShowPassword={handleShowPassword}/>
-                        {/*Password Confirmation Input*/}
+                        {/*  --- Password Confirmation Input ---*/}
                         {
                             isSignup && (
                                     <Input className={"mx-auto col-3"} id="c-password" handleChange={handleChange} type={"c-password"} placeholder="Confirm Password" handleShowPassword={handleShowPassword}/>
                             )
                         }
-                        {/*Submit Form Button*/}
+                        {/*  --- Submit Form Button ---*/}
                         <Button variant="primary" className="mx-auto col-3 d-md-block"> 
                             { isSignup ? "Sign-Up" : "Sign-In" }
                         </Button>
-                        {/*Toggle Sign-in/Sign-up form*/}
+                        {/*  --- Toggle Sign-in/Sign-up form ---*/}
                         <Button onClick={changeAuth}>{isSignup ? "Already a User? Sign-in" : "Create an Account"}</Button>
 
                 </Col>
