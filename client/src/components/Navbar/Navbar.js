@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {Container, Navbar, Nav, Dropdown} from 'react-bootstrap';
 
 const Navigation = () => {
-    const user = null;
+    const [user, setUser ] = useState(JSON.parse(localStorage.getItem('profile')));
+
+    useEffect(() => {
+        const token = user?.token;
+        // JWT
+        setUser(JSON.parse(localStorage.getItem('profile')));
+    }, [])
 
     return (
         <Navbar collapseOnSelect bg="primary" variant="dark" expand="md">
