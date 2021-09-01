@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import {Container, Navbar, Nav, Dropdown} from 'react-bootstrap';
+import decode from 'jwt-decode';
 
 const Navigation = () => {
     const [user, setUser ] = useState(JSON.parse(localStorage.getItem('profile')));
@@ -19,7 +20,13 @@ const Navigation = () => {
 
     useEffect(() => {
         const token = user?.token;
-        // JWT
+        
+        if(token) {
+            const decodedToken = decode(token);
+
+            if(decodedToken.exp * 1000 < new Date().getTime()) logout();
+        }
+
         setUser(JSON.parse(localStorage.getItem('profile')));
     }, [location])
 
