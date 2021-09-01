@@ -37,7 +37,7 @@ const Navigation = () => {
                             <div className="nav-profile">
                                 <Dropdown>
                                     <Dropdown.Toggle id="collasible-nav-dropdown">
-                                        {user.result.name.split(' ')[0]}
+                                        {user.result.username}
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>

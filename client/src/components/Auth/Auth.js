@@ -6,6 +6,9 @@ import {useDispatch} from 'react-redux';
 
 import './styles.scss';
 import Input from './Input';
+import { signIn, signUp } from '../../actions/auth';
+
+const initialState = { email: '', username: '', password: '', cpassword: ''}
 
 const Auth = () => {
 
@@ -15,6 +18,7 @@ const Auth = () => {
 
     const [showPassword, setShowPassword] = useState(false);
     const [isSignup, setIsSignup] = useState(false);
+    const [formData, setFormData] = useState(initialState);
     
     const dispatch = useDispatch();
     const history = useHistory();
@@ -26,12 +30,20 @@ const Auth = () => {
     ///   Toggle Password Visibility for Input   ///
     const handleShowPassword = () => setShowPassword( (prevShowPassword) => !prevShowPassword )
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        console.log(formData);
 
+        console.log(isSignup);
+
+        if(isSignup) {
+            dispatch(signUp(formData, history));
+        } else {
+            dispatch(signIn(formData, history));
+        }
     };
 
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+        setFormData({ ... formData, [e.target.id]: e.target.value})
     }
 
     const changeAuth = () => {
@@ -76,20 +88,20 @@ const Auth = () => {
                          *   ===   Inputs   ===
                         *    ==================   /}
                         * 
-                        {/*  ---  SIGN IN ONLY  ---, Email Input*/}
-                        { isSignup && (<Input className={"mx-auto  col-3"} id="email" handleChange={handleChange} type="email" placeholder="Email"/> ) }
-                        {/*  --- Username Input ---*/}
-                        <Input className={"mx-auto  col-3"} id="username" handleChange={handleChange} type="username" placeholder="Username"/>
+                        {/*  ---  SIGN IN ONLY  ---, Username Input*/}
+                        { isSignup && ( <Input className={"mx-auto  col-3"} id="username" handleChange={handleChange} type="username" placeholder="Username"/> ) }
+                        {/*  ---  Email Input   ---*/}
+                        <Input className={"mx-auto  col-3"} id="email" handleChange={handleChange} type="email" placeholder="Email"/>
                         {/*  --- Password Input ---*/}
                         <Input className={"mx-auto col-3"} id="password" handleChange={handleChange} type={showPassword ? "text" : "password"} placeholder="Password" handleShowPassword={handleShowPassword}/>
                         {/*  --- Password Confirmation Input ---*/}
                         {
                             isSignup && (
-                                    <Input className={"mx-auto col-3"} id="c-password" handleChange={handleChange} type={"c-password"} placeholder="Confirm Password" handleShowPassword={handleShowPassword}/>
+                                    <Input className={"mx-auto col-3"} id="cpassword" handleChange={handleChange} type={"c-password"} placeholder="Confirm Password" handleShowPassword={handleShowPassword}/>
                             )
                         }
                         {/*  --- Submit Form Button ---*/}
-                        <Button variant="primary" className="mx-auto col-3 d-md-block"> 
+                        <Button variant="primary" onClick={handleSubmit} className="mx-auto col-3 d-md-block"> 
                             { isSignup ? "Sign-Up" : "Sign-In" }
                         </Button>
                         {/*  --- Toggle Sign-in/Sign-up form ---*/}

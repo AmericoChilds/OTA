@@ -11,55 +11,47 @@ const Input = ({id, className, handleChange, type, placeholder, label, handleSho
     switch (type) {
         case "password":
             return ( 
-                <div className="input-group input-group-lg w-25 mx-auto">
+                <div className={className}>
                     <InputGroup >
-                            <Form controlId={"formGroup" + id}>
-                                <FormControl label={label} id={id} onChange={handleChange} type={type} placeholder={placeholder} />
-                            </Form>
-                            <Button onClick={handleShowPassword} variant="outline-primary">
-                                <FontAwesomeIcon icon={faEye} />
-                            </Button>
+                        <Form>
+                            <FormControl label={label} id={id} onChange={handleChange} type={type} placeholder={placeholder} />
+                        </Form>
+                        <Button onClick={handleShowPassword} variant="outline-primary">
+                            <FontAwesomeIcon icon={faEye} />
+                        </Button>
                     </InputGroup>
                 </div>
             )
         case "c-password":
             return ( 
-                <>
+                <div className={className}>
                     <InputGroup>
-                        <Form.Group className={className} controlId={"formGroup" + id}>
-                            <FormControl className={className} label={label} id={id} onChange={handleChange} type={type} placeholder={placeholder} />
-                        </Form.Group>
+                        <Form>
+                            <FormControl label={label} id={id} onChange={handleChange} type={"password"} placeholder={placeholder} />
+                        </Form>
                     </InputGroup>
-                </>
+                </div>
             )
         case "text":
             return (
-                <>
-                    
-                    <InputGroup>
-                        <Form className="mx-auto" controlId={"formGroup" + id}>
-                            <Row className="justify-content-md-center">
-                                <Col md="auto">
-                                    <FormControl label={label} id={id} onChange={handleChange} type={type} placeholder={placeholder} />
-                                </Col>
-                                <Col md="auto">
-                                    <Button onClick={handleShowPassword} variant="outline-primary">
-                                        <FontAwesomeIcon icon={faEyeSlash} />
-                                    </Button>
-                                </Col>
-                            </Row>
-                        </Form>
+                <div className={className}>
+                    <InputGroup >
+                            <Form>
+                                <FormControl label={label} id={id} onChange={handleChange} type={type} placeholder={placeholder} />
+                            </Form>
+                            <Button onClick={handleShowPassword} variant="outline-primary">
+                                <FontAwesomeIcon icon={faEyeSlash} />
+                            </Button>
                     </InputGroup>
-                </>
+                </div>
             )
         default:
             return (
-                <>
-                    <Form.Group className={className} controlId={"formGroup" + id}>
-                        <Form.Label>{label}</Form.Label>
-                        <Form.Control className={className} id={id} onChange={handleChange} type={type} placeholder={placeholder} />
-                    </Form.Group>
-                </>
+                <div className={className}>
+                    <Form>
+                        <FormControl label={label} id={id} onChange={handleChange} type={type} placeholder={placeholder} />
+                    </Form>
+                </div>
             )
 
     }
