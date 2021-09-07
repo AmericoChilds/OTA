@@ -55,6 +55,7 @@ const Auth = () => {
         // Retrieve data and token
         const result = res?.profileObj;
         const token = res?.tokenId;
+        result.username = result.givenName;
 
         try {
             // Enable utility of data

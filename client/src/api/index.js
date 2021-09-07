@@ -15,4 +15,11 @@ API.interceptors.request.use((req) => {
 export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
 
+
+export const getSpaces = (waveData) => API.get('/spaces/get', waveData);
+export const newSpace = (waveData) => API.post('/spaces/new', waveData);
+export const delSpace = (waveData) => API.delete('/spaces/del', waveData);
+export const updateSpace = (waveData) => API.post('/spaces/update', waveData);
+
+
 export const fetchPosts = () => axios.get(url);

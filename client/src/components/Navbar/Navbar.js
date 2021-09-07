@@ -5,7 +5,7 @@ import {Container, Navbar, Nav, Dropdown} from 'react-bootstrap';
 import decode from 'jwt-decode';
 
 const Navigation = () => {
-    const [user, setUser ] = useState(JSON.parse(localStorage.getItem('profile')));
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
     const history = useHistory();
     const location = useLocation();

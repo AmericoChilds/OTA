@@ -5,6 +5,7 @@ import cors from 'cors';
 
 import postRoutes from './routes/posts.js';
 import userRoutes from './routes/users.js';
+import spacesRoutes from './routes/spaces.js';
 
 import CONNECTION_URL from './protected.js';
 
@@ -16,6 +17,7 @@ app.use(cors());
 
 app.use('/posts', postRoutes);
 app.use('/user', userRoutes);
+app.use('/spaces', spacesRoutes);
 
 const PORT = process.env.PORT || 5000;
 
