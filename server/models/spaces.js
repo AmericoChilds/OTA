@@ -2,12 +2,8 @@ import mongoose from "mongoose";
 
 const spacesSchema = mongoose.Schema({
     userID: {type: String},
-    title: {type: String},
-    date: {type: Date, default: new Date()},
-    spaces: {
-        devices: Array,
-        API: Array
-    }
+    spaces: {type: String},
+    numSpaces: {type: Number, default: 0}
 })
 
 export default mongoose.model("Spaces", spacesSchema);

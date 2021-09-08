@@ -55,7 +55,7 @@ const Taskbar = ({type}) => {
         // User is Google login
         var func = false;
 
-        // Check type of login
+        // If not GoogleID, func = true
         if( user.result?.googleId == null ) {
             userID = user.result.email;
             func = true;
