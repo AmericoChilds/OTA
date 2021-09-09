@@ -16,7 +16,7 @@ export const signIn = (formData) => API.post('/user/signin', formData);
 export const signUp = (formData) => API.post('/user/signup', formData);
 
 
-export const getSpaces = (waveData) => API.get('/spaces/get', waveData);
+export const getSpaces = (getData) => API.post('/spaces/get', getData);
 export const newSpace = (waveData) => API.post('/spaces/new', waveData);
 export const delSpace = (waveData) => API.delete('/spaces/del', waveData);
 export const updateSpace = (waveData) => API.post('/spaces/update', waveData);

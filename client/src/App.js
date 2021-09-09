@@ -7,6 +7,7 @@ import './styles.scss';
 import './App.css';
 
 import { getPosts } from './actions/posts'
+import { getSpace } from './actions/spaces'
 import Navigation from './components/Navbar/Navbar';
 import Home from './components/Home/Home';
 import Auth from './components/Auth/Auth';
@@ -17,7 +18,22 @@ const App = () => {
     const user = JSON.parse(localStorage.getItem('profile'));
 
     useEffect(() => {
-        dispatch(getPosts());
+
+        if( user != null ) {
+
+            var func = false;
+            var userID;
+
+            if( user.result?.googleId == null ) {
+                userID = user.result.email;
+                func = true;
+            } else {
+                userID = user.result.googleId;
+            }
+
+            dispatch(getSpace({userID, func}))
+    
+        }
     }, [dispatch])
 
 

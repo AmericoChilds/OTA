@@ -1,4 +1,4 @@
-import spaces from "../models/spaces.js"
+import spaces from "../models/spaces.js";
 import user from "../models/user.js";
 
 export const newSpace = async(req, res) => {
@@ -90,15 +90,25 @@ export const updSpace = async(req, res) => {
 }
 
 export const getSpace = async(req, res) => {
-    const { userID } = req.body;
+    const { userID, func } = req.body;
     try {
+        console.log( req.body );
+        var existingUser;
 
-        // Find the Spaces associated with UserID
-        const spaces = spaces.findOne(userID);
+        // If user is located in the database (not GoogleAuth)
+        if( func ) {
+            // Find associated user with email
+            existingUser = await user.findOne({ userID })
+            // Check if user exists
+            if(!existingUser) return res.status(404).json({message: "User doesn't exist."});
+            // Update correct ID for wavespace
+            userID = existingUser._id;
+        } 
+        console.log(userID);
+        var waveSpace = await spaces.findOne({ userID });
 
-        if(!spaces) res.status(404).json({message: 'User has no spaces'})
+        res.status(200).json({ result: waveSpace });
 
-        res.status(200).json({ result: spaces });
 
     } catch (error) {
         console.log(error);
