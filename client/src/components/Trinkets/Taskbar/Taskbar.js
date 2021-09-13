@@ -8,7 +8,8 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusCircle, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
-import {newSpace, delSpace, curSpace} from '../../../actions/spaces';
+import {newSpace, updSpace, delSpace, curSpace} from '../../../actions/spaces';
+import SpacesList from './SpacesList';
 
 const initialState = { title: '' };
 var init = { userID: '', spaces: {[1]: "hey", [2]: "what", [3]: "okay"}}
@@ -18,7 +19,7 @@ const Taskbar = ({type}) => {
     const dispatch = useDispatch();
 
     // Wavespace Data
-    const [waveSpaces, setWaveSpaces] = useState(init) ;
+    const [waveSpaces, setWaveSpaces] = useState(JSON.parse(localStorage.getItem('spaces')));
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
     const [waveData, setWaveData] = useState(initialState);
@@ -30,6 +31,14 @@ const Taskbar = ({type}) => {
     const [showOpen, setShowOpen] = useState(false);
     const handleCloseOpen = () => setShowOpen(false);
     const handleShowOpen = () => setShowOpen(true);
+
+    const waveDataExists = () => {
+        if(waveSpaces?.result != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     const handleChange = (e) => {
 
@@ -64,6 +73,8 @@ const Taskbar = ({type}) => {
         }
 
         if(type == "delete") {
+            //dispatch(delSpace({ userID, id, func }));
+            console.log(id);
             dispatch(delSpace({ userID, id, func }));
         } else {
             dispatch(curSpace({ userID, id, func }));
@@ -128,28 +139,10 @@ const Taskbar = ({type}) => {
                         <Modal.Title>Open a Wavespace</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <Container>
-                            {
-                                Object.keys(waveSpaces.spaces).map(
-                                    ( _item, _index ) => (
-                                            <>
-                                                <Row className="justify-content-space-between"> 
-                                                    <Col>
-                                                        {waveSpaces.spaces[_item]}
-                                                    </Col>
-                                                    <Col>
-                                                        <Button onClick={handleFiles} id={`delete-${_index}`} variant="danger">
-                                                            Delete
-                                                        </Button>
-                                                        <Button onClick={handleFiles} id={`open-${_index}`} variant="outline-primary">
-                                                            Open
-                                                        </Button>
-                                                    </Col>
-                                                </Row>
-                                            </>
-                                    )
-                                )
-                            }
+                            <Container> 
+                                {
+                                    waveDataExists() && ( <SpacesList waveSpaces={waveSpaces} handleFiles={handleFiles}/>)
+                                }
                             </Container>
                         </Modal.Body>
                         <Modal.Footer>

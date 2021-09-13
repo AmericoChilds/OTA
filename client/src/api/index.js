@@ -18,8 +18,8 @@ export const signUp = (formData) => API.post('/user/signup', formData);
 
 export const getSpaces = (getData) => API.post('/spaces/get', getData);
 export const newSpace = (waveData) => API.post('/spaces/new', waveData);
-export const delSpace = (waveData) => API.delete('/spaces/del', waveData);
-export const updateSpace = (waveData) => API.post('/spaces/update', waveData);
+export const delSpace = (delData) => API.post('/spaces/del', delData);
+export const updateSpace = (updData) => API.post('/spaces/update', updData);
 
 
 export const fetchPosts = () => axios.get(url);

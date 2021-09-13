@@ -35,7 +35,7 @@ export const delSpace = ( delData ) => async (dispatch) => {
 
     try {
         // Returns Spaces array
-        const {data} = await api.delSpace();
+        const {data} = await api.delSpace(delData);
 
         dispatch({type: DELSPACE, data});
 
@@ -49,7 +49,7 @@ export const updSpace = ( updData ) => async (dispatch) => {
 
     try {
         // Returns Spaces array
-        const {data} = await api.updateSpace();
+        const {data} = await api.updateSpace(updData);
 
         dispatch({type: UDTSPACE, data});
 

@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/get', auth, getSpace);
 router.post('/new', auth, newSpace);
-router.delete('/del', auth, delSpace);
+router.post('/del', auth, delSpace);
 router.post('/update', auth, updSpace);
 
 export default router;
