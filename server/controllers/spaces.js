@@ -3,7 +3,7 @@ import user from "../models/user.js";
 
 export const newSpace = async(req, res) => {
     
-    const {title, userID, func} = req.body;
+    var {title, userID, func} = req.body;
 
     try {
 
@@ -12,7 +12,7 @@ export const newSpace = async(req, res) => {
         // If user is located in the database (not GoogleAuth)
         if( func ) {
             // Find associated user with email
-            existingUser = await user.findOne({ userID })
+            existingUser = await user.findOne({ email: userID });
             // Check if user exists
             if(!existingUser) return res.status(404).json({message: "User doesn't exist."});
             // Update correct ID for wavespace
@@ -82,7 +82,7 @@ export const newSpace = async(req, res) => {
 }
 
 export const delSpace = async(req, res) => {
-    const { userID, func, id } = req.body;
+    var { userID, func, id } = req.body;
 
     try {
 
@@ -97,7 +97,7 @@ export const delSpace = async(req, res) => {
         // If user is located in the database (not GoogleAuth)
         if( func ) {
             // Find associated user with email
-            existingUser = await user.findOne({ userID })
+            existingUser = await user.findOne({ email: userID })
             // Check if user exists
             if(!existingUser) return res.status(404).json({message: "User doesn't exist."});
             // Update correct ID for wavespace
@@ -156,7 +156,7 @@ export const delSpace = async(req, res) => {
 }
 
 export const updSpace = async(req, res) => {
-    const { userID, func, title, devices, api, id } = req.body;
+    var { userID, func, title, devices, api, id } = req.body;
 
     try {
 
@@ -170,7 +170,7 @@ export const updSpace = async(req, res) => {
         // If user is located in the database (not GoogleAuth)
         if( func ) {
             // Find associated user with email
-            existingUser = await user.findOne({ userID })
+            existingUser = await user.findOne({ email: userID })
             // Check if user exists
             if(!existingUser) return res.status(404).json({message: "User doesn't exist."});
             // Update correct ID for wavespace
@@ -211,7 +211,7 @@ export const updSpace = async(req, res) => {
 }
 
 export const getSpace = async(req, res) => {
-    const { userID, func } = req.body;
+    var { userID, func } = req.body;
     try {
 
         var existingUser;
@@ -219,7 +219,7 @@ export const getSpace = async(req, res) => {
         // If user is located in the database (not GoogleAuth)
         if( func ) {
             // Find associated user with email
-            existingUser = await user.findOne({ userID })
+            existingUser = await user.findOne({ email: userID })
             // Check if user exists
             if(!existingUser) return res.status(404).json({message: "User doesn't exist."});
             // Update correct ID for wavespace

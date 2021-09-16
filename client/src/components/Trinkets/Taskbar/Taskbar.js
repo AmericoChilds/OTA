@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusCircle, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
 import {newSpace, updSpace, delSpace, curSpace} from '../../../actions/spaces';
+import { getFunc } from '../../../actions/auth';
 import SpacesList from './SpacesList';
 
 const initialState = { title: '' };
@@ -62,23 +63,14 @@ const Taskbar = ({type}) => {
         const id = split[1];
         var userID = "";
         // User is Google login
-        var func = false;
-
-        // If not GoogleID, func = true
-        if( user.result?.googleId == null ) {
-            userID = user.result.email;
-            func = true;
-        } else {
-            userID = user.result.googleId;
-        }
+        var func = getFunc();
 
         if(type == "delete") {
-            //dispatch(delSpace({ userID, id, func }));
-            console.log(id);
             dispatch(delSpace({ userID, id, func }));
         } else {
             dispatch(curSpace({ userID, id, func }));
         }
+
     }
 
     //////////////////
