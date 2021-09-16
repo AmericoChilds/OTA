@@ -4,8 +4,6 @@ import * as api from '../api/index';
 export const getSpace = ( getData ) => async (dispatch) => {
 
     try {
-        console.log("VVVVVVVVVVVVVVVV");
-        console.log(getData);
         // Returns Spaces array
         const {data} = await api.getSpaces( getData );
         // Dispatches data for use

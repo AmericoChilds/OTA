@@ -53,3 +53,24 @@ export function getFunc() {
     }
 
 }
+
+export function getUserID() {
+
+    try {
+
+        var userID;
+
+        const user = JSON.parse(localStorage.getItem('profile'));
+
+        if( getFunc() ) {
+            userID = user.result.email;
+        } else {
+            userID = user.result.googleId;
+        }
+
+        return userID;
+    } catch(error) {
+        console.log(error);
+    }
+
+}

@@ -2,6 +2,8 @@ import React from 'react';
 import { Container, Nav, Navbar, Button, Modal, NavDropdown, Row, Col } from 'react-bootstrap';
 import Input from '../../Auth/Input'
 
+import { useEffect, fetchData } from 'react';
+
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 
@@ -9,8 +11,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusCircle, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
 import {newSpace, updSpace, delSpace, curSpace} from '../../../actions/spaces';
-import { getFunc } from '../../../actions/auth';
+import { getFunc, getUserID } from '../../../actions/auth';
 import SpacesList from './SpacesList';
+
+import { useHistory } from 'react-router';
 
 const initialState = { title: '' };
 var init = { userID: '', spaces: {[1]: "hey", [2]: "what", [3]: "okay"}}
@@ -32,6 +36,12 @@ const Taskbar = ({type}) => {
     const [showOpen, setShowOpen] = useState(false);
     const handleCloseOpen = () => setShowOpen(false);
     const handleShowOpen = () => setShowOpen(true);
+
+    const history = useHistory();
+
+    window.addEventListener('storage', () => {
+        setWaveSpaces(JSON.parse(localStorage.getItem('spaces')) || []);
+    });
 
     const waveDataExists = () => {
         if(waveSpaces?.result != null) {
@@ -65,13 +75,18 @@ const Taskbar = ({type}) => {
         // User is Google login
         var func = getFunc();
 
+        userID = getUserID();
+
         if(type == "delete") {
             dispatch(delSpace({ userID, id, func }));
+            window.location.reload();
         } else {
             dispatch(curSpace({ userID, id, func }));
+            window.location.reload();
         }
 
     }
+
 
     //////////////////
     ///   Spaces   ///
@@ -79,6 +94,7 @@ const Taskbar = ({type}) => {
 
     const createSpace = () => {
         dispatch(newSpace(waveData));
+        window.location.reload();
     }
 
     switch (type) {

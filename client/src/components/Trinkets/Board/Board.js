@@ -13,7 +13,7 @@ function Board() {
         <div>
             <Container fluid className="boardParent">
                 <Row>
-                    <Col>
+                    <Col className="md-1 colStyle">
                         <h1>Test</h1>
                     </Col>
                     <Col>

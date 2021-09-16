@@ -3,6 +3,7 @@ import { Col, Row, Button } from 'react-bootstrap';
 
 
 function SpaceID( {title, index, handleFiles} ) {
+    
     return (
         <div>
             <Row className="justify-content-space-between"> 

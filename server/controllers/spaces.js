@@ -92,7 +92,7 @@ export const delSpace = async(req, res) => {
         // Refactor array
         // Update array document
         // Return document
-
+        console.log("thisss" + userID);
         var existingUser;
         // If user is located in the database (not GoogleAuth)
         if( func ) {
@@ -103,6 +103,7 @@ export const delSpace = async(req, res) => {
             // Update correct ID for wavespace
             userID = existingUser._id;
         } 
+        
         // Finds associated wavespace
         var waveSpace = await spaces.findOne({ userID });
         // Checks if wavespace exists for user
