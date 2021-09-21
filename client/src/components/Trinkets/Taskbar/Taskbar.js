@@ -19,7 +19,7 @@ import { useHistory } from 'react-router';
 const initialState = { title: '' };
 var init = { userID: '', spaces: {[1]: "hey", [2]: "what", [3]: "okay"}}
 
-const Taskbar = ({type}) => {
+const Taskbar = ({type, handleStart, handleStop, handlePause}) => {
 
     const dispatch = useDispatch();
 
@@ -94,6 +94,7 @@ const Taskbar = ({type}) => {
 
     const createSpace = () => {
         dispatch(newSpace(waveData));
+        dispatch(curSpace({id: 1}));
         window.location.reload();
     }
 
@@ -103,21 +104,30 @@ const Taskbar = ({type}) => {
             return(
                 <>
                     <Navbar variant="dark" bg="dark" expand="lg">
-                    <Container fluid>
-                        <Navbar.Toggle aria-controls="navbar-dark-example" />
-                        <Navbar.Collapse id="navbar-dark-example">
-                        <Nav>
-                            <NavDropdown
-                            title="File"
-                            menuvariant="dark"
-                            >
-                                <NavDropdown.Item onClick={handleShowNew}>New</NavDropdown.Item>
-                                <NavDropdown.Item onClick={handleShowOpen}>Open</NavDropdown.Item>
-                            </NavDropdown>
-                        </Nav>
-                        </Navbar.Collapse>
-                    </Container>
+                        <Container className="justify-contents-center">
+                            <Navbar.Toggle aria-controls="navbar-dark-example" />
+                            <Navbar.Collapse id="navbar-dark-example">
+                            <Nav>
+                                <NavDropdown
+                                title="File"
+                                menuvariant="dark"
+                                >
+                                    <NavDropdown.Item onClick={handleShowNew}>New</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={handleShowOpen}>Open</NavDropdown.Item>
+                                </NavDropdown>
+                            </Nav>
+                            </Navbar.Collapse>
+
+                            {/* ========= */}
+                            {/*   Media   */}
+
+                            <Button onClick={handleStart} variant="success">Play</Button>
+                            <Button onClick={handlePause} variant="primary">Pause</Button>
+                            <Button onClick={handleStop} variant="danger">Stop</Button>
+                        </Container>
                     </Navbar>
+
+                    
 
                     {/* ========= */}
                     {/* New Modal */}

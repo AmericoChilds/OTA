@@ -1,9 +1,26 @@
 import React from 'react';
 import './styles.scss';
 
-const Oscillator = () => {
+import { Container, Row, Col, Button, InputGroup, FormControl, Form } from 'react-bootstrap';
+import ToolInput from './toolInput';
+import DropDownUtil from './DropDownUtil';
+
+const Oscillator = ({handleOsci}) => {
+
+    
+
     return (
-            <h1>OSCILLATOR</h1>
+            <Container>
+                <Row>
+                    <Col>
+                        <ToolInput type="bpm"/>
+                    </Col>
+                    
+                </Row>
+                <Row>
+                    <DropDownUtil type="scale"/>
+                </Row>
+            </Container>
     );
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Rack() {
+function MapGraph() {
     return (
         <div>
             
@@ -8,4 +8,4 @@ function Rack() {
     )
 }
 
-export default Rack;
+export default MapGraph;

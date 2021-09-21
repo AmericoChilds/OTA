@@ -1,4 +1,4 @@
-import { DELSPACE, NEWSPACE, UDTSPACE, GETSPACE } from "../constants/actionTypes";
+import { DELSPACE, NEWSPACE, UDTSPACE, GETSPACE, CURSPACE } from "../constants/actionTypes";
 
 const authReducer = (state = {spaceData: null}, action) => {
     switch (action.type) {
@@ -13,6 +13,9 @@ const authReducer = (state = {spaceData: null}, action) => {
             return { ... state, spaceData: action?.data };
         case GETSPACE:
             localStorage.setItem('spaces', JSON.stringify({ ...action?.data }));
+            return { ... state, spaceData: action?.data };
+        case CURSPACE:
+            localStorage.setItem('cur_space', JSON.stringify({ ...action?.data }));
             return { ... state, spaceData: action?.data };
         default:
             return state;

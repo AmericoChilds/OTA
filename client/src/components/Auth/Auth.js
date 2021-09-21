@@ -37,8 +37,10 @@ const Auth = () => {
 
         if(isSignup) {
             dispatch(signUp(formData, history));
+            window.location.reload();
         } else {
             dispatch(signIn(formData, history));
+            window.location.reload();
         }
     };
 
@@ -62,6 +64,7 @@ const Auth = () => {
             dispatch({ type: 'AUTH', data: { result, token } });
             // Redirect back to Homepage
             history.push('/');
+            window.location.reload();
         } catch(error) {
             console.log(error);
         }

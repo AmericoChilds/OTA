@@ -58,16 +58,28 @@ export const updSpace = ( updData ) => async (dispatch) => {
 }
 
 export const curSpace = ( curData ) => async (dispatch) => {
-
+    
     try {
-
-        const { id } = JSON.parse(localStorage.getItem('spaces'));
+        // Grab the user's spaces
+        const spaces  = JSON.parse(localStorage.getItem('spaces'));
+        // Obtain the id to set current
+        var { id } = curData;
+        let idUsable = id;
+        // If id isn't specify, resort to the most recent space
+        if( idUsable == null ) {
+            let lastIndex = Object.keys(JSON.parse(spaces?.result?.spaces)).length - 1;
+            idUsable = lastIndex;
+        }
+        //
+        var data = JSON.parse(spaces.result.spaces);
         
-        // Returns Spaces array
-        const {data} = await api.updateSpace();
+        if( spaces != null ) {
+            data = data[idUsable];
+            data["id"] = idUsable;
+        }
 
-        dispatch({type: CURSPACE, data});
-
+        //dispatch({type: CURSPACE, data});
+        localStorage.setItem('cur_space', JSON.stringify({ data }));
     } catch(error) {
         console.log(error);
     }

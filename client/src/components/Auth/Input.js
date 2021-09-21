@@ -12,11 +12,11 @@ const Input = ({id, className, handleChange, type, placeholder, label, handleSho
         case "password":
             return ( 
                 <div className={className}>
-                    <InputGroup >
-                        <Form>
+                    <InputGroup className="d-flex justify-content-between">
+                        <Form className="mt-2">
                             <FormControl label={label} id={id} onChange={handleChange} type={type} placeholder={placeholder} />
                         </Form>
-                        <Button onClick={handleShowPassword} variant="outline-primary">
+                        <Button className="mt-2" onClick={handleShowPassword} variant="outline-primary">
                             <FontAwesomeIcon icon={faEye} />
                         </Button>
                     </InputGroup>
@@ -25,21 +25,20 @@ const Input = ({id, className, handleChange, type, placeholder, label, handleSho
         case "c-password":
             return ( 
                 <div className={className}>
-                    <InputGroup>
-                        <Form>
+                        <Form className="mt-2">
                             <FormControl label={label} id={id} onChange={handleChange} type={"password"} placeholder={placeholder} />
                         </Form>
-                    </InputGroup>
+
                 </div>
             )
         case "text":
             return (
                 <div className={className}>
-                    <InputGroup >
-                            <Form>
+                    <InputGroup className="d-flex justify-content-between" >
+                            <Form className="mt-2">
                                 <FormControl label={label} id={id} onChange={handleChange} type={type} placeholder={placeholder} />
                             </Form>
-                            <Button onClick={handleShowPassword} variant="outline-primary">
+                            <Button className="mt-2" onClick={handleShowPassword} variant="outline-primary">
                                 <FontAwesomeIcon icon={faEyeSlash} />
                             </Button>
                     </InputGroup>
@@ -48,7 +47,7 @@ const Input = ({id, className, handleChange, type, placeholder, label, handleSho
         default:
             return (
                 <div className={className}>
-                    <Form>
+                    <Form className="mt-2">
                         <FormControl label={label} id={id} onChange={handleChange} type={type} placeholder={placeholder} />
                     </Form>
                 </div>
