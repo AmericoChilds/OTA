@@ -62,8 +62,16 @@ export const curSpace = ( curData ) => async (dispatch) => {
     try {
         // Grab the user's spaces
         const spaces  = JSON.parse(localStorage.getItem('spaces'));
-        // Obtain the id to set current
-        var { id } = curData;
+        // If spaces == null, set current to nul and return
+        if (spaces == null || spaces.result.numSpaces == 0) {
+            console.log("whatt");
+            localStorage.setItem('cur_space', JSON.stringify( null ));
+            return;
+        }
+        // Obtain the id to set current, if requested
+        if( curData != null ) {
+            var { id } = curData;
+        }
         let idUsable = id;
         // If id isn't specify, resort to the most recent space
         if( idUsable == null ) {

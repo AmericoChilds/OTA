@@ -10,6 +10,8 @@ import APITool from '../../Modules/APITool/APITool';
 
 import "./styles.scss"
 
+import NoSpaces from '../../Space/NoSpaces';
+
 import { processWD } from '../../../actions/utility';
 import { updSpace } from '../../../actions/spaces';
 
@@ -25,8 +27,10 @@ function Board( {handleAPIData, handleOsci} ) {
 
     const dispatch = useDispatch();
 
-    const checkNotes = () => {
+    const setNotes = () => {
+
         if( curSpace != null ) {
+            console.log(curSpace.data.devices.notes);
             if( curSpace?.data?.devices?.notes == null ) {
                 console.log("heya");
                 return false;
@@ -61,35 +65,34 @@ function Board( {handleAPIData, handleOsci} ) {
 
     return (
         <div>
-            <Container>
-                <Row className="mt-3 mx-auto d-flex align-content-center">
-                    <Col className="mx-auto">
-                        {  checkNotes() ? <Timeline 
-                                b1={curSpace?.data?.devices?.notes[0]}
-                                b2={curSpace?.data?.devices?.notes[1]}
-                                b3={curSpace?.data?.devices?.notes[2]}
-                                b4={curSpace?.data?.devices?.notes[3]}
-                                b5={curSpace?.data?.devices?.notes[4]}
-                                b6={curSpace?.data?.devices?.notes[5]}
-                                b7={curSpace?.data?.devices?.notes[6]}
-                                b8={curSpace?.data?.devices?.notes[7]}
-                            />
-                        : <Timeline />}
-                    </Col>
-                </Row>
-                <Row className="mt-5">
-                    <Col>
-                        <Oscillator handleOsci={handleOsci}/>
-                    </Col>
-                    <Col>
-                        <APITool handleAPIData={handleAPIData}/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col><Button onClick={refreshCurrent}>Interpolate</Button></Col>
-                    <Col><Button onClick={saveCurrent}>Save</Button></Col>
-                </Row>
-            </Container>
+                <Container>
+                    <Row className="mt-3 mx-auto d-flex align-content-center">
+                        <Col className="mx-auto">
+                            <Timeline 
+                                    b1={curSpace.data.devices?.notes[0]}
+                                    b2={curSpace.data.devices?.notes[1]}
+                                    b3={curSpace.data.devices?.notes[2]}
+                                    b4={curSpace.data.devices?.notes[3]}
+                                    b5={curSpace.data.devices?.notes[4]}
+                                    b6={curSpace.data.devices?.notes[5]}
+                                    b7={curSpace.data.devices?.notes[6]}
+                                    b8={curSpace.data.devices?.notes[7]}
+                                />
+                        </Col>
+                    </Row>
+                    <Row className="mt-5">
+                        <Col>
+                            <Oscillator handleOsci={handleOsci}/>
+                        </Col>
+                        <Col>
+                            <APITool handleAPIData={handleAPIData}/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col><Button onClick={refreshCurrent}>Interpolate</Button></Col>
+                        <Col><Button  onClick={saveCurrent}>Save</Button></Col>
+                    </Row>
+                </Container>
         </div>
     )
 }

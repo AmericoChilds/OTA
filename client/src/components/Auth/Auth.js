@@ -79,7 +79,7 @@ const Auth = () => {
     return (
         <Container>
             <Row>
-                <Col className="text-center">
+                <Col className="mt-5 text-center">
                         <h2>{!isSignup ? "Sign-In" : "Sign-Up"}</h2>
                         <GoogleLogin
                             clientId ="265415550082-jomjd2m838tcdgca6pprg492f3pmuj4v.apps.googleusercontent.com"
@@ -105,11 +105,11 @@ const Auth = () => {
                             )
                         }
                         {/*  --- Submit Form Button ---*/}
-                        <Button variant="primary" onClick={handleSubmit} className="mx-auto col-3 d-md-block"> 
+                        <Button variant="primary" onClick={handleSubmit} className="mt-3 mx-auto col-3 d-md-block"> 
                             { isSignup ? "Sign-Up" : "Sign-In" }
                         </Button>
                         {/*  --- Toggle Sign-in/Sign-up form ---*/}
-                        <Button onClick={changeAuth}>{isSignup ? "Already a User? Sign-in" : "Create an Account"}</Button>
+                        <Button variant="secondary" className="mt-3 mx-auto col-3 d-md-block" onClick={changeAuth}>{isSignup ? "Already a User? Sign-in" : "Create an Account"}</Button>
 
                 </Col>
             </Row>

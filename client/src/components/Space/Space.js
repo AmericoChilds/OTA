@@ -111,49 +111,49 @@ const Space = () => {
                 let notesPlayable = currentSpace.data.devices.notes;
 
                 if ( notesPlayable[0] != null ) {
-                    const b1 = new Tone.Loop(time => {
+                    b1 = new Tone.Loop(time => {
                         synth.triggerAttackRelease(notesPlayable[0], "8n", time);
                     }, "1n").start("0:0:0");
                 }
 
                 if ( notesPlayable[1] != null ) {
-                    const b2 = new Tone.Loop(time => {
+                    b2 = new Tone.Loop(time => {
                         synth.triggerAttackRelease(notesPlayable[1], "8n", time);
                     }, "1n").start("0:0:2");
                 }
 
                 if ( notesPlayable[2] != null ) {
-                    const b3 = new Tone.Loop(time => {
+                    b3 = new Tone.Loop(time => {
                         synth.triggerAttackRelease(notesPlayable[2], "8n", time);
                     }, "1n").start("0:1:0");
                 }
 
                 if ( notesPlayable[3] != null ) {
-                    const b4 = new Tone.Loop(time => {
+                    b4 = new Tone.Loop(time => {
                         synth.triggerAttackRelease(notesPlayable[3], "8n", time);
                     }, "1n").start("0:1:2");
                 }
 
                 if ( notesPlayable[4] != null ) {
-                    const b5 = new Tone.Loop(time => {
+                    b5 = new Tone.Loop(time => {
                         synth.triggerAttackRelease(notesPlayable[4], "8n", time);
                     }, "1n").start("0:2:0");
                 }
 
                 if ( notesPlayable[5] != null ) {
-                    const b6 = new Tone.Loop(time => {
+                    b6 = new Tone.Loop(time => {
                         synth.triggerAttackRelease(notesPlayable[5], "8n", time);
                     }, "1n").start("0:2:2");
                 }
 
                 if ( notesPlayable[6] != null ) {
-                    const b7 = new Tone.Loop(time => {
+                    b7 = new Tone.Loop(time => {
                         synth.triggerAttackRelease(notesPlayable[6], "8n", time);
                     }, "1n").start("0:3:0");
                 }
 
                 if ( notesPlayable[7] != null ) {
-                    const b8 = new Tone.Loop(time => {
+                    b8 = new Tone.Loop(time => {
                         synth.triggerAttackRelease(notesPlayable[7], "8n", time);
                     }, "1n").start("0:3:2");
                 }
@@ -167,9 +167,58 @@ const Space = () => {
     ===================
     */
 
-    const synth = new Tone.PolySynth(Tone.Synth).toDestination();
+    var synth = new Tone.PolySynth(Tone.Synth).toDestination();
+    var b1;
+    var b2;
+    var b3;
+    var b4;
+    var b5;
+    var b6;
+    var b7;
+    var b8;
+    
+    // Cancels active beats
+    // If you're seeing this... I'm sorry...
+    const cancelBeats = () => {
+        if( b1 != null ) {
+            console.log(b1);
+            b1.cancel();
+        }
+
+        if( b2 != null ) {
+            b2.cancel();
+        }
+
+        if( b3 != null ) {
+            b3.cancel();
+        }
+
+        if( b4 != null ) {
+            b4.cancel();
+        }
+        
+        if( b5 != null ) {
+            b5.cancel();
+        }
+
+        if( b6 != null ) {
+            b6.cancel();
+        }
+
+        if( b7 != null ) {
+            b7.cancel();
+        }
+
+        if( b8 != null ) {
+            b8.cancel();
+        }
+    
+    }
 
     const handleStart = () => {
+        // Prevents overlapping of audio
+        cancelBeats();
+
         Tone.Transport.stop();
         handlePlayBack();
         Tone.Transport.start();
@@ -186,6 +235,7 @@ const Space = () => {
     const emptySpaces = () => {
 
         let spacesTemp = JSON.parse(localStorage.getItem("spaces"));
+        let curSpacesTemp = JSON.parse(localStorage.getItem("cur_space"));
 
         if(spacesTemp == null) {
             return false;
@@ -194,6 +244,12 @@ const Space = () => {
         } else if(spacesTemp?.result?.numSpaces == 0) {
             return false;
         }
+
+        if(curSpacesTemp == null) {
+            return false;
+        } else if(curSpacesTemp.data == null) {
+            return false;
+        } 
         
     }
 

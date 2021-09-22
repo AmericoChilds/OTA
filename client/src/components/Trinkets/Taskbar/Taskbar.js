@@ -78,7 +78,14 @@ const Taskbar = ({type, handleStart, handleStop, handlePause}) => {
         userID = getUserID();
 
         if(type == "delete") {
+            // Delete respective space
             dispatch(delSpace({ userID, id, func }));
+            // Get updated spaces data
+            let curSpaceTemp = JSON.parse(localStorage.getItem("cur_space"));
+            // If deleted space is current, update current space
+            if(curSpaceTemp?.data?.id == id ) {
+                dispatch(curSpace());
+            }
             window.location.reload();
         } else {
             dispatch(curSpace({ userID, id, func }));
@@ -94,7 +101,7 @@ const Taskbar = ({type, handleStart, handleStop, handlePause}) => {
 
     const createSpace = () => {
         dispatch(newSpace(waveData));
-        dispatch(curSpace({id: 1}));
+        dispatch(curSpace());
         window.location.reload();
     }
 

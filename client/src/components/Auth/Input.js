@@ -13,10 +13,10 @@ const Input = ({id, className, handleChange, type, placeholder, label, handleSho
             return ( 
                 <div className={className}>
                     <InputGroup className="d-flex justify-content-between">
-                        <Form className="mt-2">
+                        <Form className="mt-2 d-inline">
                             <FormControl label={label} id={id} onChange={handleChange} type={type} placeholder={placeholder} />
                         </Form>
-                        <Button className="mt-2" onClick={handleShowPassword} variant="outline-primary">
+                        <Button className="mt-2 d-inline" onClick={handleShowPassword} variant="outline-primary">
                             <FontAwesomeIcon icon={faEye} />
                         </Button>
                     </InputGroup>

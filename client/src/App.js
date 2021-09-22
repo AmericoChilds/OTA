@@ -13,6 +13,8 @@ import Home from './components/Home/Home';
 import Auth from './components/Auth/Auth';
 import Space from './components/Space/Space';
 
+import Footer from './components/Footer/Footer';
+
 const App = () => {
     const dispatch = useDispatch();
     const user = JSON.parse(localStorage.getItem('profile'));
@@ -46,6 +48,7 @@ const App = () => {
                 <Route path="/spaces" exact component={Space} />
             </Switch>
         </BrowserRouter>
+
     )
 }
 
