@@ -6,11 +6,8 @@ RUN npm install
 
 COPY . .
 
-ARG BASE_URL
-ENV REACT_APP_BASE_URL=${BASE_URL}
+ENV PORT=3000
 
-EXPOSE 80
-
-EXPOSE 443
+EXPOSE 3000
 
 CMD ["npm", "start"]
