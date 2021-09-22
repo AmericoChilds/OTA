@@ -1,0 +1,32 @@
+name: WaveSpace
+
+services:
+  client-app:
+    image: client-app
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    networks:
+      - "wavespace-app"
+  server-app:
+    image: server-app
+    ports:
+      - "5000:5000"
+    networks:
+      - "wavespace-app"
+
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm install -g bats
+      - run: bats -v
+
+networks:
+    wavespace-app:
+      driver: bridge
