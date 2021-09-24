@@ -21,7 +21,7 @@ app.use('/spaces', spacesRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-const url = process.env.CONNECTION_URL;
+const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.8uiuw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 console.log(url);
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
