@@ -1,20 +1,25 @@
 version: "3"
 
 services:
-  client-app:
-    image: client-app
+  ota-frontend:
+    image: americoc/ota-frontend
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
+      - "3000:3000"
     networks:
       - "wavespace-app"
-  server-app:
-    image: server-app
+    environment:
+      - REACT_APP_API_URL="${REACT_APP_API_URL}"
+      - REACT_APP_API_KEY="${REACT_APP_API_KEY}"
+      - REACT_APP_ICON_URL="${REACT_APP_ICON_URL}"
+  ota-backend:
+    image: americoc/ota-backend
     ports:
       - "5000:5000"
     networks:
       - "wavespace-app"
+    environment:
+      - CONNECTION_URL="${MONGO_CONNECTION_URL}"
 
 networks:
     wavespace-app:
