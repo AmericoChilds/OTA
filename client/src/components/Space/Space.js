@@ -43,19 +43,20 @@ const Space = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        console.log("heyh");
         const fetchData = async () => {
             if( user != null) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     setLat(position.coords.latitude);
                     setLong(position.coords.longitude);
                 });
-
+                console.log(lat);
                 // If user doesn't allow location access, default to Madison, WI
                 if( lat == null || long == null ) {
                     lat = 43.0592056;
                     long = -89.4008958;
                 }
-
+                console.log(long);
                 await fetch(`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`)
                     .then(res => res.json())
                     .then(result => {
