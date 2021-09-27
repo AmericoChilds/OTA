@@ -49,11 +49,12 @@ const Space = () => {
 
                 setLat(43.0592056);
                 setLong(-89.4008958);
-
+                /*
                 navigator.geolocation.getCurrentPosition(function(position) {
                     setLat(position.coords.latitude);
                     setLong(position.coords.longitude);
                 });
+                */
                 console.log(lat);
 
                     
