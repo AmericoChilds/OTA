@@ -62,7 +62,7 @@ const Space = () => {
                 var key = process.env.REACT_APP_API_KEY;
                 key.replace('"', "");
                 key.replace('"', "");
-                var urlWA = `${app}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${key}`;
+                var urlWA = `https://api.openweathermap.org/data/2.5/weather/?lat=${lat}&lon=${long}&units=metric&APPID=75c8db17cf21215d8d65b305aad4a491`;
                     
                 console.log(urlWA);
                 await fetch(urlWA)
