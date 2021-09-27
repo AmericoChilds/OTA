@@ -47,8 +47,8 @@ const Space = () => {
         const fetchData = async () => {
             if( user != null) {
 
-                lat = 43.0592056;
-                long = -89.4008958;
+                setLat(43.0592056);
+                setLong(-89.4008958);
 
                 navigator.geolocation.getCurrentPosition(function(position) {
                     setLat(position.coords.latitude);
