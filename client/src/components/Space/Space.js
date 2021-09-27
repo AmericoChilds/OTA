@@ -50,6 +50,12 @@ const Space = () => {
                     setLong(position.coords.longitude);
                 });
 
+                // If user doesn't allow location access, default to Madison, WI
+                if( lat == null || long == null ) {
+                    lat = 43.0592056;
+                    long = -89.4008958;
+                }
+
                 await fetch(`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`)
                     .then(res => res.json())
                     .then(result => {
@@ -62,12 +68,6 @@ const Space = () => {
                         // Store api data and interpolate it
                         storeWAPIData(result);
                 });
-
-                // If user doesn't allow location access, default to Madison, WI
-                if( lat == null || long == null ) {
-                    lat = 43.0592056;
-                    long = -89.4008958;
-                }
 
                 // Set BPM from current space
                 if( currentSpace != null ) {
