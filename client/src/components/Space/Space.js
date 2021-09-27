@@ -56,9 +56,13 @@ const Space = () => {
                 });
                 */
                 console.log(lat);
-                console.log(process.env.REACT_APP_API_URL);
-                console.log(process.env.REACT_APP_API_KEY);
-                var urlWA = `${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`;
+                var app = process.env.REACT_APP_API_URL;
+                app.replace('"', "");
+                app.replace('"', "");
+                var key = process.env.REACT_APP_API_KEY;
+                key.replace('"', "");
+                key.replace('"', "");
+                var urlWA = `${app}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${key}`;
                     
                 console.log(urlWA);
                 await fetch(urlWA)
