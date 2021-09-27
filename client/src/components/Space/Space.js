@@ -58,7 +58,7 @@ const Space = () => {
                 console.log(lat);
 
                     
-                console.log(long);
+                console.log(`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`);
                 await fetch(`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`)
                     .then(res => res.json())
                     .then(result => {
