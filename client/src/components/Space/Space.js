@@ -56,6 +56,8 @@ const Space = () => {
                 });
                 */
                 console.log(lat);
+                console.log(process.env.REACT_APP_API_URL);
+                console.log(process.env.REACT_APP_API_KEY);
                 var urlWA = `${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`;
                     
                 console.log(urlWA);
